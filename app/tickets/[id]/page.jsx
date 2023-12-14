@@ -13,7 +13,9 @@ export async function generateStaticParams() {
 
 }
 
+
 async function getTicket(id) {
+
     const res = await fetch('http://localhost:5000/tickets/' + id, {
         next: {
             revalidate: 20
@@ -22,9 +24,9 @@ async function getTicket(id) {
 
     if (!res.ok) {
         const error = new Error('Not Found');
-        error.notFound = true;
         throw error;
     }
+
     return res.json();
 }
 export default async function TicketDetails({ params }) {
