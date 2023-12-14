@@ -18,9 +18,6 @@ export default function Tickets() {
                 </div>
             </nav>
 
-
-
-
             <Suspense fallback={<Loading />}>
                 <TicketList />
             </Suspense>
