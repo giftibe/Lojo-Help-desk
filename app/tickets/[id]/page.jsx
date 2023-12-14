@@ -23,13 +23,8 @@ async function getTicket(id) {
     if (!res.ok) {
         notFound()
     }
-    
     return res.json();
 }
-
-
-
-
 export default async function TicketDetails({ params }) {
     const id = params.id
     const ticket = await getTicket(id)
