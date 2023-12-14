@@ -1,13 +1,33 @@
+import { notFound } from "next/navigation";
 
+export const dynamicParams = false
+
+// implementing static rendering for deployment
+export async function generateStaticParams() {
+    const res = await fetch('http://localhost:5000/tickets')
+    const tickets = await res.json();
+
+    return tickets.map((ticket) => (
+        { id: ticket.id }
+    ))
+
+}
 
 async function getTicket(id) {
     const res = await fetch('http://localhost:5000/tickets/' + id, {
         next: {
-            revalidate: 10
+            revalidate: 20
         }
     })
+
+    if (!res.ok) {
+        notFound()
+    }
+    
     return res.json();
 }
+
+
 
 
 export default async function TicketDetails({ params }) {
