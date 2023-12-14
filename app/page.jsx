@@ -14,7 +14,12 @@ export default function Home() {
         <Link href="/tickets">
           <button className="btn-primary">View Tickets</button>
         </Link>
+
+        <Link href="/tickets/create" className="ml-4"> 
+          <button className="btn-primary">Create Ticket</button>
+        </Link>
       </div>
+
 
       <h2>Company Updates</h2>
 
