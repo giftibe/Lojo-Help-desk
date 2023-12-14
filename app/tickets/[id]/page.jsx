@@ -21,7 +21,9 @@ async function getTicket(id) {
     })
 
     if (!res.ok) {
-        notFound()
+        const error = new Error('Not Found');
+        error.notFound = true;
+        throw error;
     }
     return res.json();
 }
