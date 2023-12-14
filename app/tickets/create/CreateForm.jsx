@@ -1,14 +1,15 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/router"
+import { useState, useRef } from "react"
+import { useRouter } from "next/navigation"
 
 
 export default function createForm() {
+    const router = useRouter()
 
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
-    const [priority, setPriority] = useState('Low')
+    const [priority, setPriority] = useState('low')
     const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async (e) => {
@@ -25,6 +26,12 @@ export default function createForm() {
             headers: { 'content-Type': 'application/json' },
             body: JSON.stringify(ticket)
         })
+
+        if (res.status === 201) {
+            router.push('/tickets')
+        }
+
+        setIsLoading(false);
     }
 
 
@@ -67,9 +74,8 @@ export default function createForm() {
                 className="btn-primary"
                 disabled={isLoading}
             >
-                {!isLoading && <span>Adding ...</span>}
-
-                {isLoading && <span> Add ticket</span>}
+                {isLoading && <span>Adding...</span>}
+                {!isLoading && <span> Add Ticket</span>}
             </button>
         </form >
     )
